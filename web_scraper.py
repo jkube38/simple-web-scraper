@@ -133,12 +133,12 @@ def main(args):
     phone = ns.phone
     website = ns.website
 
-    get_html(website)
-
     if not ns:
         parser.print_usage()
         print(ns)
         sys.exit(1)
+
+    get_html(website)
 
     if not url and not email and not phone:
         scrape_for_url(website)
