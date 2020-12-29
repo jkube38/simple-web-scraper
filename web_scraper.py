@@ -17,7 +17,8 @@ def get_html(site):
     """Send request to get the website and creates a html
         file for the following functions to read"""
 # ----WEBSITE REQUEST----
-    get_website = requests.get(site)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+    get_website = requests.get(site, headers=headers)
 
     request_response = get_website.status_code
 
@@ -36,21 +37,23 @@ def scrape_for_url(site):
     with open('site_text.html', 'r') as site_file:
         get_website = site_file.read()
 # ---URL SEARCH----
-    url_pattern = r'''(https?:\/\/[-a-zA-Z0-9@:%._\+~#=]
+    url_pattern = r'''((https?:\/\/[-a-zA-Z0-9@:%._\+~#=]
         {1,2048}\.[a-zA-Z0-9()]{1,6}\b)([-a-zA-Z0-9()@:
-        %_\+.~#?&\/\/=,;]*)'''
+        %_\+.~#?&\/\/=,;]*))'''
     url_regex = re.compile(url_pattern, re.VERBOSE)
 
     url_search = re.findall(url_regex, get_website)
+    full_url_list = []
+    for url in url_search:
+        full_url_list.append(url[0])
 
     print('----Jordan\'s Web Scraper----')
     print(f'RESULTS FOR: {site}')
     print('----URL----')
     print(f'Found {len(url_search)}')
     counter = 1
-    for link in url_search:
-        jlink = ''.join(link)
-        print(f'{counter}) {jlink}')
+    for link in full_url_list:
+        print(f'{counter}) {link}')
         counter += 1
 
 
