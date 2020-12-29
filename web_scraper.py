@@ -17,7 +17,8 @@ def get_html(site):
     """Send request to get the website and creates a html
         file for the following functions to read"""
 # ----WEBSITE REQUEST----
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) \
+AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
     get_website = requests.get(site, headers=headers)
 
     request_response = get_website.status_code
